@@ -21,17 +21,12 @@ octal = [0-7]+
 virgula = [',']
 
 %%
+{numero}{virgula}{numero}{eol}       {real++;}
+{hexa}+{eol}     {hexadecimal++;}
+{octal}{eol}       {octal++;}
+{numero}{eol}        {decimal++;}
 
-{branco}        {System.out.println(" ");}
-{quebra}        {System.out.println("------");}
+.       {}
 
-{numero}{virgula}{numero}{eol}       {real++;System.out.println("REAL "+yytext());}
-{hexa}+{eol}     {hexadecimal++;System.out.println("HEXA => "+yytext());}
-{octal}{eol}       {octal++;System.out.println("OCTAL => "+yytext());}
-{numero}{eol}        {decimal++; System.out.println("DECIMAL => "+yytext());}
-
-
-
-.       {System.out.println(yytext());}
-
+fim             { System.out.println(decimal+" decimais. \n"+octal+" octais. \n"+hexadecimal+" hexadecimais. \n"+real+" reais." ); return null; }
 <<EOF>> {System.out.println("FIM => fim inesperado [!EOF!]");return null;}
