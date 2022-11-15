@@ -1,10 +1,4 @@
 <!-- Ɛ -->
-
-<style>
-    g{color:green; font-weight:bold}
-    r{color:red; font-weight:bold}
-</style>
-
 # GR - Gramática Regular (GLD)
 <b>Nesta gramática a substituição é realizada da Esquerda -> Direita.</b>  
 * É necessário montar a Gramática, Produção, Exemplos e Demonstração de funcionamento.  
@@ -126,7 +120,7 @@ Os símbolos não-terminais são delimitados pelos sinais <b> < > </b>
 |Notação|Símbolo|
 |:--:|:--:|
 |Produção|<b>: : =<b>|
-|NTerminal|<b>< ></b>|
+|Não Terminal|<b>< ></b>|
 |Alternativa|<b> \| </b>|
 |Repetição| { ... }|
 
@@ -170,15 +164,26 @@ Os símbolos não-terminais são delimitados pelos sinais <b> < > </b>
 
 <hr>
 
-## GSC - Gramática Sensivel a Contexto
-Ɛ 
-## GRE - Gramática Recursivamente Enumerável   
-Ɛ
 # Compilador Java
 
 ## Compilador em formato T
+
+![](assets_markdown\asset02.png)
+
+Um compilador em formato T representa o funcionamento da estrutura de criação de um compilador. Para criarmos um compilador é necessário utilizar de uma linguagem de programação pré existente, no nosso caso utilizamos a linguagem java.
+Ao modificarmos o arquivo .flex podemos gerar um analisador léxico Lexer.java que irá ler o programa de entrada e processar todos os elementos até um ponto de termino.
+
+
+Podemos criar um compilador de Java utilizando Python, C, C# ... e propriamente Java.
+
 ## Bootstraping
+
+Representa a arvore de compilação do compilador de último nível. Ou seja, demonstra graficamente em diagramas em T o funcionamento do compilador atual até o processo de conversão em linguagem de máquina. 
 ## BNF + Gráfico
+**Colocar mais exemplos**
+![](./assets_markdown/asset03.jpg)
+
+Diagramas BNF representam unicamente a linha a ser avaliada, exibindo gráficamente o que acontece com aquela linha em observação. Neste exemplo podemos criar nomes para um identificador, sendo composto por necessáriamente uma letra e podendo conter N outras letras ou N números em sequencia, até que o loop se encerre e o gráfico chege ao final.
 
 ## JFLEX
 ### Como converter uma expressão regular para BNF ?
@@ -202,7 +207,43 @@ Remove os parenteses dos elementos simples.
 ```
 
 ### YYText e YYLength
+
+Estas funções servem para indicar ao compilador a intenção de exibir no console quais as palavras que foram recebidas por ele (**yytext**) e o tamanho em caráctes que elas possuem (**yylength**). Vale resaltar que são funções em Java, precisam ser escritas dentro de um **{SOT(yytext());}**
 ### Anatomia do JFLEX
+![](assets_markdown\asset01.png)
+O bloco destacado em amarelo irá conter apenas código em java, e todo o texto escrito dentro deste container, será replicado ao arquivo java do compilador.
+
+O bloco destacado em verde representa o local onde podemos definir regras e macros.
+
+O bloco azul contêm as regras léxicas, onde são escritos as definições das palavras e os identificadores EBNF e suas consequências.
 ### Caracteres invisíveis
+Carácteres invisíveis são recursos utilizados pelo computador para identificar espaços, quebras de linhas e término dos arquivos.
+Para que o código do compilador reconheça estes elementos é importante utilizar-mos em sua composição.
+
+|Notação|Função|
+|:-:|:-:|
+|\t|Tabulação|
+|\ |Espaços|
+|\r\n|Final da linha + Quebra|
+
+### EBNF 
+|Notação|Função|
+|:-:|:-:|
+|.|Qualquer carácter|
+|[a-z]|qualquer letra de A a Z|
+|a*|nenhum ou N sequencias de letras A|
+|a+|uma ou N sequencias de letras A|
+|a{2}|Exatamente 2 caracteres AA|
+|a \| b|A ou B|
 ### Detecção do final do arquivo
 
+Afim de detectar o final de um arquivo, é necessário que no código LEX seja implementado endpoints como: 
+
+**\<\<EOF>> {SOT("NOT END FOUND"); return null;}**
+
+Esta função tem como premissa retornar uma exception quando o fim do arquivo não foi encontrado. Porém é necessário implementar uma função que reconheça o final do arquivo, para que o programa apenas atinja este endpoint quando realmente houver um erro válido.
+Para isso devemos declarar antes dessa função:
+
+**FIM { SOT("O FIM CHEGOU !"); return null;}**
+
+devemos sempre colocar um **return null** no final do código em java para que o compilador pare o reconhecimento das palavras e encerre sua execução. O mesmo vale para o primeiro exemplo acima.
