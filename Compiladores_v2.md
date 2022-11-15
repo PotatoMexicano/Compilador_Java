@@ -164,7 +164,24 @@ Os símbolos não-terminais são delimitados pelos sinais <b> < > </b>
 
 <hr>
 
-# Compilador Java
+# => Compilador Java
+
+## Analisador léxico
+
+O analisado léxico realiza a tokenização dos elementos do código fonte, classificando em grupos aos quais tendem a realemnte pertencerem, exemplo: variavel A é um ID, condicional IF é uma condicional. Quando não é possivel classificar algum elemento, o analizador léxico retorna um erro informando o não entendimento da palavra em questão.
+Para gerar um analisador léxico, é preciso de um scanner, que irá realizar a leitura do EBNF e gerar um Lexer.
+
+#### TOKEN
+Elemento gerado pelo analisador léxico, tratase de uma classificação gerada. o Token é uma produção gramática, que é composta também por um lexema, que por sua vez, representa o comando avaliado pelo lexer.
+
+
+## Analisador Sintático
+
+O analisador sintático, realiza a leitura da linha e avalia a integridade e a conformidade dela, verificando se toda a linha possui sentido e se está de acordo com os elementos dispostos nela. O programa responsável por esta etápa é o PARSER que irá gerar o parsing, o analisador sintático.
+
+## Analisador semantico
+
+O analisador semantico tem como principio avaliar todo o escopo do código, verificando compatibilidades de variaveis com seus tipos e avaliando as utilizações das váriaveis declaradas.
 
 ## Compilador em formato T
 
@@ -186,6 +203,7 @@ Representa a arvore de compilação do compilador de último nível. Ou seja, de
 Diagramas BNF representam unicamente a linha a ser avaliada, exibindo gráficamente o que acontece com aquela linha em observação. Neste exemplo podemos criar nomes para um identificador, sendo composto por necessáriamente uma letra e podendo conter N outras letras ou N números em sequencia, até que o loop se encerre e o gráfico chege ao final.
 
 ## JFLEX
+
 ### Como converter uma expressão regular para BNF ?
 Dada a expressão regular  : 
 ```java

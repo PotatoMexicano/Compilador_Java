@@ -1,0 +1,7 @@
+if
+/* frase
+de teste */
+while
+//frase de teste
+/ * frase curta */
+teste

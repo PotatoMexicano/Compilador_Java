@@ -11,20 +11,23 @@ package Compilador;
 %class Lexer
 
 quebra = [\r\n]+
-branco = [\ \t]+
+vazio =  [\t \ ]+
 
-numero = [0-9]+
-letra = [A-F]+
-hexa = {numero}*{letra}+{numero}+ | {numero}+{letra}+{numero}*
-eol = {branco} | {quebra}
-octal = [0-7]+
-virgula = [',']
+DECIMAL = [0-9]+
+HEXA = [a-zA-Z]+
 
 %%
-{numero}{virgula}{numero}{eol}       {real++;}
-{hexa}+{eol}     {hexadecimal++;}
-{octal}{eol}       {octal++;}
-{numero}{eol}        {decimal++;}
+
+{vazio}     {}
+{quebra}    {}
+
+{DECIMAL},{DECIMAL}  { System.out.println("REAL: "+yytext()); }
+
+{DECIMAL}*{HEXA}+{DECIMAL}*   { System.out.println("HEXA: "+yytext()); }
+
+[0-7]* { System.out.println("DECIMAL: "+yytext());}
+
+[0-9]* { System.out.println("OCTAL: "+yytext()); }
 
 .       {}
 

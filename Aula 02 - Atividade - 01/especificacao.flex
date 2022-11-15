@@ -4,13 +4,9 @@ package Compilador;
 %class Lexer
 %%
 
-total        { System.out.println("Var: "+yytext()+" ==> reconhecido "+yylength()+" caracteres."); }
+{vazio}     {}
+{quebra}    {}
 
-total[0-9]*  { System.out.println("Var: "+yytext()+" ==> reconhecido "+yylength()+" caracteres."); }
-
-[a-z_]*total { System.out.println("Var: "+yytext()+" ==> reconhecido "+yylength()+" caracteres."); }
-
-[\r\n]+      { System.out.println("ENTER => reconhecido [ENTER]\n"); }
-[\ \t]+      { System.out.println("VAZIO => reconhecido [VAZIO|TAB]"); }
+[_a-zA-Z][a-zA-Z0-9]*    { System.out.println("Palavra reconhecida: "+yytext());}
 
 .            { System.out.println("Outro: "+yytext()+" ==> Não reconhecido"); }
