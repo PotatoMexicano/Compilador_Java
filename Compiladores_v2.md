@@ -122,7 +122,7 @@ Os símbolos não-terminais são delimitados pelos sinais <b> < > </b>
 |Produção|<b>: : =<b>|
 |Não Terminal|<b>< ></b>|
 |Alternativa|<b> \| </b>|
-|Repetição| { ... }|
+
 
 ## Exemplo
 ```json
@@ -142,11 +142,16 @@ Os símbolos não-terminais são delimitados pelos sinais <b> < > </b>
 
 # EBNF Extended Backus Naur Form
 
+O EBNF é uma extensão do BNF, ele possui mais elementos para compor uma expressão. Como Repetidores, procedência, modulos de opção de elementos.
+
 |Notação|Símbolo|
 |:--:|:--:|
 |Prioridade| ( ... )|
+|Repetição| { ... }|
 |Opcional|[ ... ]|
 |Terminal|' ... '|
+
+As chaves {...} possuem as mesmas funções do fechamento de kleene, podendo conter de 0 até N elementos dentro do laço de repetição.
 
 ## Exemplo
 ```json
@@ -161,6 +166,24 @@ Os símbolos não-terminais são delimitados pelos sinais <b> < > </b>
 <integer> ::= <numeric>{<numeric>}
 <numeric> ::= 0|1|2|3|4|5|6|7|8|9
 ```
+
+## Diagrama sintático
+
+* Não terminais - Retângulos
+* Terminais - Circulos
+
+![](assets_markdown\asset04.png)
+
+Os operadores lógicos OU são divisores de linhas, gerando bifurcações que dividem para 2 alternativas.
+
+### Opcional
+
+![](assets_markdown\asset06.png)
+
+### LOOP
+
+![](assets_markdown\asset05.png)
+
 
 <hr>
 
@@ -196,6 +219,23 @@ Podemos criar um compilador de Java utilizando Python, C, C# ... e propriamente 
 ## Bootstraping
 
 Representa a arvore de compilação do compilador de último nível. Ou seja, demonstra graficamente em diagramas em T o funcionamento do compilador atual até o processo de conversão em linguagem de máquina. 
+
+Compila o código bom no compilador ruim 
+![](./assets_markdown/bootstraping01.png)
+gerando um compilador bom e ruim.
+
+Pegamos o código do compilador bom e processamos no compilador bom e ruim.
+![](./assets_markdown/bootstraping02.png)
+Gerando um compilador puramente bom.
+
+## Cross-compiling
+
+**Vantagem**: Podemos obter uma linguagem completa, que é capaz de gerar um compilador por si só.
+
+Escrevemos uma linguagem simples em C, compilamos em GCC e obtemos um compilador simples(C).
+
+Após isso, refazemos o código da linguagem em simples e compilamos no simples(C) obtendo um programa puramente escrito em simples.
+
 ## BNF + Gráfico
 **Colocar mais exemplos**
 ![](./assets_markdown/asset03.jpg)
